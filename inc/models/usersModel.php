@@ -5,13 +5,11 @@ class usersModel{
         if (!in_array($field, array('id', 'email', 'username'))) exit('Error field');
         $result = DB::query('SELECT * FROM `users` WHERE `'.$field.'` = "'.DB::escape($value).'"');
         if (empty($result)) return false;
-        //$result[0]['statusName'] = self::$userTypes[$result[0]['status']];
         return $result[0];
     }
     public static function login($login, $pass){
         $result = DB::query('SELECT * FROM `users` WHERE (`email` = "'.DB::escape($login).'" OR `username` = "'.DB::escape($login).'") AND `pass` = "'.md5($pass).'"');
         if (empty($result)) return false;
-        //$result[0]['statusName'] = self::$userTypes[$result[0]['status']];
         return $result[0];
     }
     public static function clearField($str){

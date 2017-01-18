@@ -7,7 +7,7 @@ class loginController extends Controller{
     public function indexAction(){
         if (isset($_POST['login']) && isset($_POST['pass'])){
             $success = !is_array($_POST['login']) * !is_array($_POST['pass']);
-            if ($success){//��� ���� ���� � �������� ��������
+            if ($success){//Переменные являются строками
                 $login = usersModel::login($_POST['login'], $_POST['pass']);
                 if ($login){
                     $_SESSION['users'] = $login;

@@ -22,7 +22,7 @@ class defaultController extends Controller{
                     }
                 }
             }
-            if ($success){//��� ���� ���� � �������� ��������
+            if ($success){//Все поля заданы и являются строками
                 $status = array();
                 $status['username'] = !usersModel::getUser('username', $_POST['username']);
                 $status['username'] *= strlen($_POST['username']) >= 3 && strlen($_POST['username']) <= 20;
@@ -35,7 +35,7 @@ class defaultController extends Controller{
                 $status['status'] = !empty($_POST['status']);
                 foreach ($status as $val) $success *= $val;
             }
-            if ($success){//��� �������� ������ �������
+            if ($success){//Все поля корректно заполнены
                 $users_id = usersModel::addUser($_POST);
                 if (!empty($_FILES['file']['tmp_name'])){
                     $update = array('avatar' => imagesModel::upload($_FILES['file']['tmp_name'], IMAGES_PATH.'/avatar_'.$users_id));
