@@ -1,5 +1,5 @@
 <?php
-class DB{	public static function query($query){		return dbClass::getInstance()->query($query);	}
+class DB{	public static function query($query, $indKey = ''){		return dbClass::getInstance()->query($query, $indKey);	}
 	public static function escape($str){		return dbClass::getInstance()->escape($str);	}
 	public static function getInsId(){
 		return dbClass::getInstance()->getInsId();
@@ -17,7 +17,7 @@ class mysqlClass{
 		mysql_select_db(DB_NAME, $this->dbLink) or die ('SQL_Error: ' . mysql_error());
 		mysql_query('SET NAMES `utf8`', $this->dbLink);
 	}
-	public function query($query, $indKey = ''){
+	public function query($query, $indKey){
 		if (empty($query)) return false;
 		if (strpos($query, 'information_schema')) return false;
 		$result = mysql_query($query, $this->dbLink);
@@ -44,7 +44,7 @@ class mysqliClass{
 		$this->dbLink = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die ('SQLi_Error: cant connect to DB, please configure inc/config.php');
 		mysqli_query($this->dbLink, 'SET NAMES `utf8`');
 	}
-	public function query($query){
+	public function query($query, $indKey){
 		if (empty($query)) return false;
 		if (strpos($query, 'information_schema')) return false;
 		$result = mysqli_query($this->dbLink, $query);
